@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = ''
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+compileJava.options.encoding = 'UTF-8' // устанавливает кодировку для компилируемого кода
+javadoc.options.encoding = 'UTF-8' // устанавливает кодировку для генерируемой документации
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+    implementation 'commons-io:commons-io:2.15.1'
+}
+
+
+jar {
+    archiveFileName = 'GUI.jar'
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.GUI'
+        )
+    }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
